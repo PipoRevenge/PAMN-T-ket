@@ -21,7 +21,7 @@ class TicketRemoteImpl(private val listener: TicketUpdateListener) : TicketRemot
                         fullName = data["fullName"] as String,
                         //dni = data["dni"] as Int,
                         //checkIn = data["checkIn"] as Date?,
-                        //idGroup = data["idGroup"] as Int?
+                        idGroup = data["idGroup"] as String?
                     )
                     tickets[document.id] = ticket
                 }

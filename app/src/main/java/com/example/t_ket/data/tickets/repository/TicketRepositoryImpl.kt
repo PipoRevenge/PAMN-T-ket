@@ -18,7 +18,7 @@ class TicketRepositoryImpl : TicketRepository, TicketUpdateListener {
     override fun printTickets() {
         tickets?.forEach { (id, ticket) ->
             Log.d("TAG" ,"Me cago en todo")
-            Log.d("TAG" ,"Ticket ID: $id, Status: ${ticket.status}")
+            Log.d("TAG" ,"Ticket ID: $id, Status: ${ticket.status}, idGropu: ${ticket.idGroup}")
         }
     }
     override fun startListeningToTickets(id_event: String) {

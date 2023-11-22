@@ -7,5 +7,5 @@ data class Ticket(
     val fullName: String = "", // Propietario del ticket nombre completo
     //val dni: Int, // Identificador del propietario
     //var checkIn: Date?, // Hora de acceso al evento
-    //val idGroup: Int? = 0, // Identificador del grupo (si existe)
+    val idGroup: String? = "", // Identificador del grupo (si existe)
 )

@@ -17,8 +17,7 @@ import com.example.t_ket.ui.theme.TketTheme
 import com.example.t_ket.data.tickets.repository.TicketRepositoryImpl
 
 class MainActivity : ComponentActivity() {
-    //private val firestore = FirebaseFirestore.getInstance()
-    //private val ticketRemote = TicketRemoteImpl(firestore)
+
     private val ticketRepository: TicketRepository = TicketRepositoryImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {

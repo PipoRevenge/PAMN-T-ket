@@ -39,6 +39,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -52,8 +53,14 @@ android {
 
 dependencies {
     val appcompat_version = "1.6.1"
+    val navVersion = "2.7.1"
 
+    //Navegation requirements
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     implementation("androidx.appcompat:appcompat:$appcompat_version")
+
+    implementation("com.google.android.material:material:1.10.0")
     // For loading and tinting drawables on older versions of the platform
     implementation("androidx.appcompat:appcompat-resources:$appcompat_version")
     implementation("androidx.core:core-ktx:1.9.0")
@@ -73,4 +80,5 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
 }

@@ -8,6 +8,4 @@ public interface TicketInteractor {
     fun getAllTickets(): List<Ticket>
     //Validar ticket
     suspend fun checkTicket(ticket: Ticket): Boolean
-
-
 }

@@ -1,4 +1,6 @@
 package com.example.t_ket.data.tickets.repository.remote
+import android.content.ContentValues.TAG
+import android.util.Log
 import com.example.t_ket.data.tickets.model.Ticket
 import com.example.t_ket.data.tickets.repository.TicketUpdateListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -9,7 +11,8 @@ class TicketRemoteImpl(private val listener: TicketUpdateListener) : TicketRemot
         firestore.collection("Events").document(id_event).collection("Tickets")
             .addSnapshotListener { snapshots, e ->
                 if (e != null) {
-                    // Log the error
+                    Log.d(TAG, "Error al obtener los tickets desde Firebase: ${e.message}")
+
                     return@addSnapshotListener
                 }
 
@@ -29,8 +32,15 @@ class TicketRemoteImpl(private val listener: TicketUpdateListener) : TicketRemot
             }
     }
 
-    override fun updateTicketStatusInFirebase(id_event:String,id: String, status: Boolean) {
-        firestore.collection("Events").document(id_event).collection("Tickets").document(id)
-            .update("status", status)
+    override fun updateTicketStatusInFirebase(id_event:String,id: String, status: Boolean):Boolean {
+        try {
+            firestore.collection("Events").document(id_event).collection("Tickets").document(id)
+                .update("status", status)
+            return true
+        }catch (e: Exception) {
+            Log.d(TAG, "Error al actualizar el estado del ticket en Firebase: ${e.message}")
+            return false;
+        }
+
     }
 }

@@ -7,7 +7,7 @@ interface TicketRepository {
     fun startListeningToTickets(id_event: String)
 
     fun getTicketById(id:String): Ticket?
-    fun updateTicketStatus(id_event:String,id: String, status: Boolean)
+    fun updateTicketStatus(id_event:String,id: String, status: Boolean): Boolean
     fun printTickets()
 }
 interface TicketUpdateListener {

@@ -5,7 +5,7 @@ import android.util.Log
 import com.example.t_ket.data.tickets.model.Ticket
 import com.example.t_ket.data.tickets.repository.remote.TicketRemote
 import com.example.t_ket.data.tickets.repository.remote.TicketRemoteImpl
-import com.google.firebase.database.core.Tag
+
 
 class TicketRepositoryImpl : TicketRepository, TicketUpdateListener {
 
@@ -25,9 +25,9 @@ class TicketRepositoryImpl : TicketRepository, TicketUpdateListener {
         ticketRemote.getTicketsFromFirebase(id_event)
     }
 
-    override fun updateTicketStatus(id_event:String, id: String, status: Boolean) {
+    override fun updateTicketStatus(id_event:String, id: String, status: Boolean): Boolean {
         tickets[id]?.status = status
-        ticketRemote.updateTicketStatusInFirebase(id_event,id, status)
+        return ticketRemote.updateTicketStatusInFirebase(id_event,id, status)
     }
 
     override fun onTicketsUpdated(newTickets: Map<String, Ticket>) {

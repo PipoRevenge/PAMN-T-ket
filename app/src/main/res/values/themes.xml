@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Base.Theme.TKet" parent="Theme.Material3.DayNight.NoActionBar">
+                <item name="android:statusBarColor">@color/primary</item>
+    </style>
 
-    <style name="Theme.Tket" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.TKet" parent="Base.Theme.TKet" />
 </resources>

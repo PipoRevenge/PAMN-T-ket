@@ -14,9 +14,8 @@ public class TicketInteractorImpl(private val ticketInteractor: TicketInteractor
         TODO("Not yet implemented")
     }
 
-    override suspend fun checkTicket(ticket: Ticket): Boolean {
-        //return ticketRepository.updateTicketStatus()
-        TODO("Not yet implemented")
+    override suspend fun checkTicket(id_event:String, id: String, status: Boolean): Boolean {
+        return ticketRepository.updateTicketStatus(id_event,id,status)
     }
 
     override fun getValidatedTickets(): List<Ticket> {

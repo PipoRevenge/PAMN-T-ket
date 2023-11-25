@@ -13,7 +13,7 @@ public interface TicketInteractor {
 
 
     //Validar ticket
-    suspend fun checkTicket(ticket: Ticket): Boolean
+    suspend fun checkTicket(id_event:String, id: String, status: Boolean): Boolean
 
     fun getTicketById(): Ticket
 

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.t_ket.R
 import com.example.t_ket.databinding.FragmentEventInfoBinding
 
@@ -14,6 +15,7 @@ class EventInfoFragment : Fragment() {
     private var _binding: FragmentEventInfoBinding? = null
     private val binding get() = _binding!!
 
+    private val EventInfoViewModel by viewModels<EventInfoViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

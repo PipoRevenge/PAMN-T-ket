@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,7 +37,7 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/etlogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -45,7 +46,7 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonlogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -53,6 +54,25 @@
             android:text="Log In"
             android:textSize="25dp" />
 
+        <TextView
+            android:id="@+id/TextToVerify"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:visibility="invisible"
+            android:text="¡Su código es correcto!"
+            />
+
+        <TextView
+            android:id="@+id/TextToError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="125dp"
+            android:text="¡Su código es incorrecto!"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:visibility="invisible" />
     </GridLayout>
 
 

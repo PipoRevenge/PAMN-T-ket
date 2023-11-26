@@ -46,13 +46,32 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/button_val"
+            android:id="@+id/buttonVal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
             android:text="Validar"
             android:textSize="25dp" />
+        <TextView
+            android:id="@+id/textError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:textAlignment="center"
+            android:text="Work in Progress. See you next time"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/textVal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="70dp"
+            android:visibility="invisible"
+            android:textAlignment="center"
+            android:text="El estado es correcto"
+            android:textSize="20dp" />
 
     </GridLayout>
 

@@ -20,4 +20,7 @@ class UserRepositoryImpl :UserRepository {
         )
     }
 
+    override fun getIdEvent(): String {
+        return user?.codeOfEvent ?: ""
+    }
 }

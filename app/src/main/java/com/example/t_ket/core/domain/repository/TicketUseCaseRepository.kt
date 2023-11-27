@@ -1,9 +1,9 @@
-package com.example.t_ket.domain.interactor.ticketInteractor;
+package com.example.t_ket.core.domain.repository;
 
-import com.example.t_ket.data.tickets.model.Ticket
+import com.example.t_ket.core.domain.model.Ticket
 
 //Interfaz para Imple
-public interface TicketInteractor {
+public interface TicketUseCaseRepository {
     //Lista completa de ticket
     fun getAllTickets(): List<Ticket>
     //Filtrar en presenter ^^^^^^^ o implementar un caso por cada situacion

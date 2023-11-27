@@ -1,10 +1,9 @@
-package com.example.t_ket.data.tickets.repository
+package com.example.t_ket.core.data.pipo_chinese.tickets.repository
 
-import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.t_ket.data.tickets.model.Ticket
-import com.example.t_ket.data.tickets.repository.remote.TicketRemote
-import com.example.t_ket.data.tickets.repository.remote.TicketRemoteImpl
+import com.example.t_ket.core.domain.model.Ticket
+import com.example.t_ket.core.data.pipo_chinese.tickets.repository.remote.TicketRemote
+import com.example.t_ket.core.data.pipo_chinese.tickets.repository.remote.TicketRemoteImpl
 
 
 class TicketRepositoryImpl : TicketRepository, TicketUpdateListener {

@@ -1,5 +1,4 @@
-package com.example.t_ket.data.tickets.repository.remote
-import com.example.t_ket.data.tickets.model.Ticket
+package com.example.t_ket.core.data.pipo_chinese.tickets.repository.remote
 
 interface TicketRemote {
     fun getTicketsFromFirebase(id_event: String)

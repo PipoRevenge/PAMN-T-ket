@@ -1,6 +1,6 @@
-package com.example.t_ket.data.tickets.repository
+package com.example.t_ket.core.data.pipo_chinese.tickets.repository
 
-import com.example.t_ket.data.tickets.model.Ticket
+import com.example.t_ket.core.domain.model.Ticket
 
 
 interface TicketRepository {

@@ -1,4 +1,4 @@
-package com.example.t_ket.data.tickets.model
+package com.example.t_ket.core.domain.model
 
 import java.util.Date
 

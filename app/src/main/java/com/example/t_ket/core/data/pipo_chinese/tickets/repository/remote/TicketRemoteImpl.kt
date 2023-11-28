@@ -1,8 +1,8 @@
-package com.example.t_ket.data.tickets.repository.remote
+package com.example.t_ket.core.data.pipo_chinese.tickets.repository.remote
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.t_ket.data.tickets.model.Ticket
-import com.example.t_ket.data.tickets.repository.TicketUpdateListener
+import com.example.t_ket.core.domain.model.Ticket
+import com.example.t_ket.core.data.pipo_chinese.tickets.repository.TicketUpdateListener
 import com.google.firebase.firestore.FirebaseFirestore
 
 class TicketRemoteImpl(private val listener: TicketUpdateListener) : TicketRemote {

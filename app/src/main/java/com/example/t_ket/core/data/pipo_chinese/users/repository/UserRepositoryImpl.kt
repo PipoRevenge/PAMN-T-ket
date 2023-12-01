@@ -3,7 +3,6 @@ package com.example.t_ket.core.data.pipo_chinese.users.repository
 import com.example.t_ket.core.domain.model.User
 import com.example.t_ket.core.data.pipo_chinese.users.repository.remote.UserRemote
 import com.example.t_ket.core.data.pipo_chinese.users.repository.remote.UserRemoteImpl
-import com.example.t_ket.core.data.pipo_chinese.users.repository.remote.UserRepository
 
 //Aqui van las funciones en si que interactua con la base de datos mediante interactor
 class UserRepositoryImpl : UserRepository {

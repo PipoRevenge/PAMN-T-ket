@@ -19,10 +19,11 @@ class TicketRemoteImpl(private val listener: TicketUpdateListener) : TicketRemot
                 val tickets = mutableMapOf<String, Ticket>()
                 for (document in snapshots!!) {
                     val data = document.data
+                    val id = document.id
                     val ticket = Ticket(
                         status = data["status"] as Boolean,
                         fullName = data["fullName"] as String,
-                        //dni = data["dni"] as Int,
+                        dni = data["dni"] as String,
                         //checkIn = data["checkIn"] as Date?,
                         idGroup = data["idGroup"] as String?
                     )
@@ -36,6 +37,7 @@ class TicketRemoteImpl(private val listener: TicketUpdateListener) : TicketRemot
         try {
             firestore.collection("Events").document(id_event).collection("Tickets").document(id)
                 .update("status", status)
+
             return true
         }catch (e: Exception) {
             Log.d(TAG, "Error al actualizar el estado del ticket en Firebase: ${e.message}")

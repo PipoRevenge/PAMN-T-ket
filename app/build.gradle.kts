@@ -57,6 +57,9 @@ dependencies {
     val appcompat_version = "1.6.1"
     val navVersion = "2.7.1"
 
+    //For Pipo
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+
     //Navegation requirements
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")

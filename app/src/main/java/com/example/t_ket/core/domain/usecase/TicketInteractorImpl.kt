@@ -2,8 +2,8 @@ package com.example.t_ket.core.domain.usecase;
 import com.example.t_ket.core.domain.model.Ticket
 import com.example.t_ket.core.data.pipo_chinese.tickets.repository.TicketRepository;
 import com.example.t_ket.core.data.pipo_chinese.tickets.repository.TicketRepositoryImpl;
-import com.example.t_ket.core.data.pipo_chinese.users.repository.UserRepository
-import com.example.t_ket.core.data.pipo_chinese.users.repository.UserRepositoryImpl
+import com.example.t_ket.data.userDi.repository.UserRepository
+import com.example.t_ket.data.userDi.implementation.UserRepositoryImpl
 import com.example.t_ket.core.domain.repository.TicketUseCaseRepository
 
 //Aqui va las propias interacciones con el modelo en cuestion usando el repositorio para los datos

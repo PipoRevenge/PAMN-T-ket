@@ -10,7 +10,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
-class firebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
+class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
     private val firestore = FirebaseFirestore.getInstance()
     private var eventRef: CollectionReference? = null
 
@@ -86,28 +86,33 @@ class firebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
     }
 
 
-    override fun getTicketsFromFirebase() {
-        eventRef
-            ?.addSnapshotListener { snapshots, e ->
-                if (e != null) {
-                    Log.d(ContentValues.TAG, "Error al obtener los tickets desde Firebase: ${e.message}")
-                    return@addSnapshotListener
-                }
+    override fun getTicketsFromFirebase(): Map<String, Ticket> {
+        val tickets = mutableMapOf<String, Ticket>()
 
-                val tickets = mutableMapOf<String, Ticket>()
-                for (document in snapshots!!) {
-                    val data = document.data
-                    val ticket = Ticket(
-                        status = data["status"] as Boolean,
-                        fullName = data["fullName"] as String,
-                        dni = data["dni"] as String,
-                        //checkIn = data["checkIn"] as Date?,
-                        idGroup = data["idGroup"] as String?
-                    )
-                    tickets[document.id] = ticket
+        eventRef
+            ?.get()
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val snapshots = task.result
+                    for (document in snapshots!!) {
+                        val data = document.data
+                        val ticket = Ticket(
+                            status = data["status"] as Boolean,
+                            fullName = data["fullName"] as String,
+                            dni = data["dni"] as String,
+                            //checkIn = data["checkIn"] as Date?,
+                            idGroup = data["idGroup"] as String?
+                        )
+                        tickets[document.id] = ticket
+                    }
+                    listener.onTicketsUpdated(tickets)
+                } else {
+                    val exception = task.exception
+                    Log.d(ContentValues.TAG, "Error al obtener los tickets desde Firebase: ${exception?.message}")
                 }
-                listener.onTicketsUpdated(tickets)
             }
+
+        return tickets
     }
 
     override suspend fun updateTicketStatusInFirebase(id: String, status: Boolean): Boolean {
@@ -118,5 +123,24 @@ class firebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
             Log.d(ContentValues.TAG, "Error al actualizar el estado del ticket en Firebase: ${e.message}")
             return false
         }
+    }
+
+    override suspend fun getTicketsByStatus(validation: Boolean?): List<Ticket> {
+        val tickets = mutableListOf<Ticket>()
+        val result = eventRef?.whereEqualTo("status", validation)?.get()?.await()
+        if (result != null) {
+            for (document in result) {
+                val data = document.data
+                val ticket = Ticket(
+                    status = data["status"] as Boolean,
+                    fullName = data["fullName"] as String,
+                    dni = data["dni"] as String,
+                    //checkIn = data["checkIn"] as Date?,
+                    idGroup = data["idGroup"] as String?
+                )
+                tickets.add(ticket)
+            }
+        }
+        return tickets
     }
 }

@@ -1,5 +1,5 @@
-package com.example.t_ket.core.data.pipo_chinese.users.repository
-//Aqui es la interfaz de las funciones del Impl
+package com.example.t_ket.data.userDi.repository
+
 interface UserRepository {
     suspend fun checkIsStaff(id_event:String, staffCode:String): Boolean
 

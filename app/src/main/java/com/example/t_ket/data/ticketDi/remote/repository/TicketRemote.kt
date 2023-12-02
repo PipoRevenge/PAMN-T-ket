@@ -8,6 +8,7 @@ interface TicketRemote {
     suspend fun getTicketsFromGroup(id_group: String): List<Ticket>
     suspend fun getTicketByDni(dni_ticket: String): Ticket?
     suspend fun updateStatusTicket(id_ticket: String, status: Boolean)
-    fun getTicketsFromFirebase()
+    fun getTicketsFromFirebase(): Map<String, Ticket>
     suspend fun updateTicketStatusInFirebase(id: String, status: Boolean): Boolean
+    suspend fun getTicketsByStatus(validation: Boolean?): List<Ticket>
 }

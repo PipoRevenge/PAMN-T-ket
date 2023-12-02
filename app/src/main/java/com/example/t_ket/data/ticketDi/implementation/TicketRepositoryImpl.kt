@@ -1,17 +1,17 @@
 package com.example.t_ket.data.ticketDi.implementation
 
 import com.example.t_ket.core.domain.model.Ticket
-import com.example.t_ket.data.ticketDi.remote.implementation.firebaseImpl
+import com.example.t_ket.data.ticketDi.remote.implementation.TicketFirebaseImpl
 import com.example.t_ket.data.ticketDi.remote.repository.TicketRemote
 import com.example.t_ket.data.ticketDi.repository.TicketRepository
 import com.example.t_ket.data.ticketDi.repository.TicketUpdateListener
 
 class TicketRepositoryImpl() : TicketRepository,TicketUpdateListener {
-    private val remote: TicketRemote = firebaseImpl(this)
+    private val remote: TicketRemote = TicketFirebaseImpl(this)
     private val tickets = mutableMapOf<String, Ticket>()
     override suspend fun setIdEvent(id_event: String) {
         remote.setIdEvent(id_event)
-        remote.getTicketsFromFirebase()
+        tickets.putAll(remote.getTicketsFromFirebase())
         // Aquí deberías también establecer el id del evento en tu fuente de datos local
     }
 
@@ -42,6 +42,19 @@ class TicketRepositoryImpl() : TicketRepository,TicketUpdateListener {
     }
     override fun onTicketsUpdated(newTickets: Map<String, Ticket>) {
         tickets.putAll(newTickets)
+    }
+
+    override suspend fun getValidatedTickets(): List<Ticket> {
+        return remote.getTicketsByStatus(true)
+    }
+
+    override suspend fun getNonValidatedTickets(): List<Ticket> {
+
+        return remote.getTicketsByStatus(null)
+    }
+
+    override suspend fun getInvalidatedTickets(): List<Ticket> {
+        return remote.getTicketsByStatus(true)
     }
 }
 

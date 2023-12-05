@@ -13,4 +13,5 @@
     <color name="background">#F5F5F5</color>
     <color name="primary">#FF9D33</color>
     <color name="card_color">#E7E7E7</color>
+    <color name="statusBar">#E58C00</color>
 </resources>

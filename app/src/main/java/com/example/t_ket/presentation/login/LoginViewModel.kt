@@ -1,4 +1,4 @@
-package com.example.t_ket.presentation.EventInfo
+package com.example.t_ket.presentation.login
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,7 +10,7 @@ import com.example.t_ket.core.domain.usecase.AssociatedUserLoginUseCase
 import kotlinx.coroutines.launch
 
 
-class EventInfoViewModel (
+class LoginViewModel (
     //private val UserInteractor: UserInteractorImpl
 ) :  ViewModel() {
     private val userInteractor : UserUseCaseRepository = AssociatedUserLoginUseCase()

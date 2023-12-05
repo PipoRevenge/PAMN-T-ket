@@ -13,7 +13,7 @@ public interface TicketUseCaseRepository {
 
 
     //Validar ticket
-    suspend fun checkTicket(id_ticket: String): Boolean
+    suspend fun checkTicket(ticketInfo: String):Boolean?
 
     fun getTicketById(): Ticket
 

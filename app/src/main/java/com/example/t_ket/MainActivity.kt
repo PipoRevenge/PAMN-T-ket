@@ -7,8 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.t_ket.data.ticketDi.implementation.TicketRepositoryImpl
-import com.example.t_ket.data.ticketDi.repository.TicketRepository
+import com.example.t_ket.core.data.ticketDi.implementation.TicketRepositoryImpl
+import com.example.t_ket.core.data.ticketDi.repository.TicketRepository
 import com.example.t_ket.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

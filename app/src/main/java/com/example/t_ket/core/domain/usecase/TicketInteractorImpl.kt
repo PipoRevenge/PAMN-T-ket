@@ -4,12 +4,14 @@ import com.example.t_ket.core.data.ticketDi.implementation.TicketRepositoryImpl
 import com.example.t_ket.core.data.ticketDi.repository.TicketRepository
 import com.example.t_ket.core.data.userDi.repository.UserRepository
 import com.example.t_ket.core.data.userDi.implementation.UserRepositoryImpl
+
 import com.example.t_ket.core.domain.repository.TicketUseCaseRepository
 
 //Aqui va las propias interacciones con el modelo en cuestion usando el repositorio para los datos
 
 public class TicketInteractorImpl: TicketUseCaseRepository {
     private val ticketRepository : TicketRepository = TicketRepositoryImpl()
+
     override fun getAllTickets(): List<Ticket> {
         TODO("Not yet implemented")
     }
@@ -29,6 +31,7 @@ public class TicketInteractorImpl: TicketUseCaseRepository {
             return null
         }
         return false
+
     }
 
     override fun getValidatedTickets(): List<Ticket> {

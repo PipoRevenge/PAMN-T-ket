@@ -54,6 +54,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
     val appcompat_version = "1.6.1"
     val navVersion = "2.7.1"
 
@@ -65,9 +66,16 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     implementation("androidx.appcompat:appcompat:$appcompat_version")
 
+    //Qr requirements
+    implementation("com.journeyapps:zxing-android-embedded:4.1.0") { isTransitive  = false }
+    implementation ("com.google.zxing:core:3.3.0")
+
     //DaggerHilt
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
+    //Particles login
+    implementation ("com.github.ibrahimsn98:android-particles:2.0")
+    implementation ("com.google.android.material:material:1.3.0")
 
     //viewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")

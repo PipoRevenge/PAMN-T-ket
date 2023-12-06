@@ -27,43 +27,4 @@ class EventInfoFragment : Fragment() {
         _binding = FragmentEventInfoBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initObservers()
-        initListeners()
-    }
-
-    private fun initObservers() {
-        EventInfoViewModel.signUpState.observe(viewLifecycleOwner) { state ->
-            when(state) {
-                 true -> {
-                     with(binding){
-                         TextToVerify.isVisible=true
-                         Log.d("TAG", "He pasado por aqui")
-                     }
-                }
-                 false -> {
-                     with(binding){
-                         TextToError.isVisible=true
-                     }
-                }
-            }
-        }
-    }
-
-    private fun initListeners() {
-        with(binding) {
-            buttonlogin.setOnClickListener {
-                handleLogIn()
-            }
-        }
-    }
-
-    private fun handleLogIn() {
-        val code = binding.etlogin.text.toString()
-        EventInfoViewModel.signUp(code)
-    }
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/eventInfoFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/qrWindowFragment"
@@ -20,4 +20,13 @@
         android:name="com.example.t_ket.presentation.EventInfo.EventInfoFragment"
         android:label="fragment_event_info"
         tools:layout="@layout/fragment_event_info" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.t_ket.presentation.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_eventInfoFragment"
+            app:destination="@id/eventInfoFragment" />
+    </fragment>
 </navigation>

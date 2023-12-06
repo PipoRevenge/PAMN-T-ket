@@ -70,6 +70,9 @@ dependencies {
     //DaggerHilt
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
+    //Particles login
+    implementation ("com.github.ibrahimsn98:android-particles:2.0")
+    implementation ("com.google.android.material:material:1.3.0")
 
     //viewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")

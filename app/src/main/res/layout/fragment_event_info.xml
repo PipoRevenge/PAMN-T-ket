@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:text="Estoy en el fragmento">
-
     </TextView>
+
 
 
 </FrameLayout>

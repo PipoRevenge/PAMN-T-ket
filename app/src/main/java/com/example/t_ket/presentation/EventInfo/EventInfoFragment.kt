@@ -27,7 +27,4 @@ class EventInfoFragment : Fragment() {
         _binding = FragmentEventInfoBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-
-
-
 }

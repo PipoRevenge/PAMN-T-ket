@@ -8,6 +8,9 @@ import com.example.t_ket.core.domain.repository.UserUseCaseRepository
 class AssociatedUserLoginUseCase() : UserUseCaseRepository {
      private val userRepository : UserRepository = UserRepositoryImpl()
      override suspend fun associateUser(codigo: String): Boolean{
-        return userRepository.checkIsStaff(codigo.substring(0,3),codigo)
+         if(codigo == ""){
+             return false
+         }
+         return userRepository.checkIsStaff(codigo.substring(0,3),codigo)
     }
 }

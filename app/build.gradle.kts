@@ -2,8 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -70,9 +68,7 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.1.0") { isTransitive  = false }
     implementation ("com.google.zxing:core:3.3.0")
 
-    //DaggerHilt
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+
     //Particles login
     implementation ("com.github.ibrahimsn98:android-particles:2.0")
     implementation ("com.google.android.material:material:1.3.0")

@@ -14,6 +14,8 @@ import com.example.t_ket.core.data.ticketDi.repository.TicketRepository
 import com.example.t_ket.databinding.ActivityMainBinding
 import com.example.t_ket.presentation.EventInfo.EventInfoFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {

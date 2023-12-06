@@ -8,12 +8,122 @@
 
     tools:context=".presentation.EventInfo.EventInfoFragment">
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:text="Estoy en el fragmento">
-    </TextView>
+        android:layout_height="match_parent"
+        >
+
+
+    </LinearLayout>
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:columnCount="1">
+        <ImageView
+
+            app:layout_gravity="center"
+
+            android:src="@drawable/Ellipse15">
+
+
+        </ImageView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Evento"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+
+            />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/primary"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="5dp"
+            >
+
+
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/EventFrame"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:background="#E7E7E7"
+            app:layout_gravity="center_horizontal"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <androidx.gridlayout.widget.GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:columnCount="1"
+                >
+
+
+                <!-- Hora de inicio -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hora de inicio: x"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:layout_marginTop="5dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hora de final: x"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Aforo disponible: x"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:layout_marginTop="5dp"/>
+
+                <!-- Entradas validas -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Entradas validas: x"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:layout_marginTop="5dp"
+                    />
+
+
+                <!-- Entradas no validas -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Entradas no validas: x"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:layout_marginTop="5dp"
+                    />
+            </androidx.gridlayout.widget.GridLayout>
+
+
+
+        </FrameLayout>
+
+
+
+
+
+    </androidx.gridlayout.widget.GridLayout>
 
 
 

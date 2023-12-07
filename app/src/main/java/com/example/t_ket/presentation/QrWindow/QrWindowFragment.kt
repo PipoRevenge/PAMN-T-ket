@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.t_ket.R
+import com.example.t_ket.core.domain.repository.TicketUseCaseRepository
+import com.example.t_ket.core.domain.usecase.TicketInteractorImpl
 import com.example.t_ket.databinding.FragmentQrWindowBinding
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.ResultPoint
@@ -17,13 +20,14 @@ import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
+import kotlinx.coroutines.launch
 
 class QrWindowFragment : Fragment() {
 
     private var _binding: FragmentQrWindowBinding? = null
     private val binding get() = _binding!!
     private lateinit var barcodeView: DecoratedBarcodeView
-
+    private val ticketInteractor : TicketUseCaseRepository = TicketInteractorImpl()
     private val qrResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val scanningResult = IntentIntegrator.parseActivityResult(result.resultCode, result.data)
@@ -32,6 +36,10 @@ class QrWindowFragment : Fragment() {
                 initScanner()
             } else {
                 Toast.makeText(requireContext(), "El valor escaneado es: " + scanningResult.contents, Toast.LENGTH_LONG).show()
+                lifecycleScope.launch {
+                    Toast.makeText(requireContext(), "TOTO PIOLA ", Toast.LENGTH_LONG).show()
+                    ticketInteractor.checkTicket(scanningResult.contents)
+                }
             }
             // Volver a iniciar el escáner después de mostrar el resultado
             initScanner()

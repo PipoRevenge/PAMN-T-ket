@@ -1,7 +1,10 @@
 package com.example.t_ket.core.domain.usecase;
+import android.util.Log
 import com.example.t_ket.core.domain.model.Ticket
 import com.example.t_ket.core.data.ticketDi.implementation.TicketRepositoryImpl
 import com.example.t_ket.core.data.ticketDi.repository.TicketRepository
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.example.t_ket.core.data.userDi.repository.UserRepository
 import com.example.t_ket.core.data.userDi.implementation.UserRepositoryImpl
 
@@ -21,24 +24,27 @@ public class TicketInteractorImpl: TicketUseCaseRepository {
     }
 
     override suspend fun checkTicket(ticketInfo: String): Boolean? {
-        val id_ticket = "" // String o JSON con un campo
-        val ticket = ticketRepository.getTicketById(id_ticket)
-        if( ticket != null){
-            if(ticket.status == false){
-                ticketRepository.updateStatusTicket(id_ticket,true)
-                return true
+        val id_ticket = "" // String
+        val regex = "\"([^\"]*)\"".toRegex()
+        val matchResults = regex.findAll(ticketInfo)
+        if (matchResults != null) {
+            for ((index, matchResult) in matchResults.withIndex()) {
+                // El índice 0 generalmente es la coincidencia completa, el índice 1 es el primer grupo de captura, y así sucesivamente.
+                val value = matchResult.groupValues[1]
+                // Imprimir solo el valor del segundo match
+                if (index == 1) {
+                    Log.d("AAAAAAAAAAAAAAAAA", "$value")
+                }
             }
-            return null
+            return true
+        } else {
+            return false
         }
-        return false
-
     }
-
-    override fun getValidatedTickets(): List<Ticket> {
+    override fun getNotValidatedTickets(): List<Ticket> {
         TODO("Not yet implemented")
     }
-
-    override fun getNotValidatedTickets(): List<Ticket> {
+    override fun getValidatedTickets(): List<Ticket> {
         TODO("Not yet implemented")
     }
 

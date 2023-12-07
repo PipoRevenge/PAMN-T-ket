@@ -6,75 +6,9 @@
     android:background="@color/background"
     tools:context=".presentation.TicketList.TicketListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="708dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/background"
-        android:columnCount="1"
-
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="20dp"
-            android:textAlignment="center"
-            android:text="Ticket Validator"
-            android:textSize="80dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="70dp"
-            android:text="Introduzca el nombre"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/editTextTicket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="0dp"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/buttonVal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="0dp"
-            android:text="Validar"
-            android:textSize="25dp" />
-        <TextView
-            android:id="@+id/textError"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            android:textAlignment="center"
-            android:text="Work in Progress. See you next time"
-            android:textSize="20dp" />
-        <TextView
-            android:id="@+id/textVal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="70dp"
-            android:visibility="invisible"
-            android:textAlignment="center"
-            android:text="El estado es correcto"
-            android:textSize="20dp" />
-
-    </GridLayout>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

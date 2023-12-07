@@ -18,14 +18,6 @@ class EventInfoViewModel (
     val signUpState: LiveData<Boolean>
         get() = _signUpState
 
-    fun signUp(code: String) {
-        viewModelScope.launch {
-            var result = userInteractor.associateUser(code)
-            _signUpState.value = result
-            Log.d("TAG" ,"Result: $result")
-            Log.d("TAG" ,"Comms")
-        }
-    }
 
     //private fun isValidEmail(email: String): Boolean  = userInteractor.associateUser(email)
 

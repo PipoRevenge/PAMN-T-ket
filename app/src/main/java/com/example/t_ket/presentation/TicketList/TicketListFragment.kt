@@ -8,21 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.t_ket.R
 import com.example.t_ket.databinding.FragmentEventInfoBinding
 import com.example.t_ket.databinding.FragmentTicketListBinding
-
+import com.example.t_ket.presentation.TicketList.adapter.TicketListAdapter
 
 
 class TicketListFragment : Fragment() {
     private var _binding: FragmentTicketListBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var ticketListAdapter: TicketListAdapter
     private val TicketListViewModel by viewModels<TicketListViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        initRecyclerView()
         _binding = FragmentTicketListBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -38,13 +42,12 @@ class TicketListFragment : Fragment() {
             when(state) {
                 true -> {
                     with(binding){
-                        textVal.isVisible=true
-                        Log.d("TAG", "He pasado por aqui")
+
                     }
                 }
                 false -> {
                     with(binding){
-                        textError.isVisible=true
+
                     }
                 }
             }
@@ -53,14 +56,16 @@ class TicketListFragment : Fragment() {
 
     private fun initListeners() {
         with(binding) {
-            buttonVal.setOnClickListener {
-                handleLogIn()
-            }
         }
     }
 
-    private fun handleLogIn() {
-        val code = binding.editTextTicket.text.toString()
-        TicketListViewModel.signUp(code)
+    fun initRecyclerView(){
+        with(binding){
+
+            binding.recyclerTickets.apply {
+                layoutManager = GridLayoutManager(context, 1)
+                adapter = ticketListAdapter
+            }
+        }
     }
 }

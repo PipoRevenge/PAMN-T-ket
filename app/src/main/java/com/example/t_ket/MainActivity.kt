@@ -7,15 +7,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.t_ket.core.data.eventDi.implementation.EventImpl
 import com.example.t_ket.core.data.eventDi.repository.EventRepository
-import com.example.t_ket.core.data.ticketDi.implementation.TicketRepositoryImpl
-import com.example.t_ket.core.data.ticketDi.repository.TicketRepository
+import com.example.t_ket.core.data.eventDi.implementation.TicketRepositoryImpl
+import com.example.t_ket.core.data.eventDi.repository.TicketRepository
 import com.example.t_ket.databinding.ActivityMainBinding
-import com.example.t_ket.presentation.EventInfo.EventInfoFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -34,15 +31,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initUI()
         //Prubas pipo
-        ticketRepository = TicketRepositoryImpl() // Asume que TicketRepositoryImpl es la implementación de tu interfaz
         eventRepository = EventImpl()
+        ticketRepository = eventRepository.getTicketRepository()
 
         // Ahora puedes llamar a las funciones de la interfaz
 
 
         //pipoPruebas()
         lifecycleScope.launch (Dispatchers.IO){
-            ticketRepository.setIdEvent("UOT")
+            eventRepository.initEvent("UOT")
             Log.d("MainActivity", "setIdEvent: UOT")
 
             val allTickets = ticketRepository.getAllTickets()
@@ -60,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             ticketRepository.updateStatusTicket("UOT001", false)
             Log.d("MainActivity", "updateStatusTicket: UOT001, false")
 
-            eventRepository.setEventId("UOT")
 
             val eventInfo = eventRepository.getEventInfo()
             Log.d("MainActivity", "getTicketByDni: $eventInfo")

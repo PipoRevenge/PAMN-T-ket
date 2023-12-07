@@ -1,14 +1,30 @@
 package com.example.t_ket.core.data.eventDi.remote.implementation
 
-import com.example.t_ket.core.data.eventDi.remote.EventRemote
+import com.example.t_ket.core.data.eventDi.remote.repository.EventRemote
 import com.example.t_ket.core.domain.model.Event
-import com.example.t_ket.core.domain.model.Ticket
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 
 class EventFirebaseImpl : EventRemote {
     private val firestore = FirebaseFirestore.getInstance()
-    override suspend fun getEventInfo(eventId : String): Event? {
+    private val storage = FirebaseStorage.getInstance()
+    private lateinit var eventId :String
+    suspend fun exists(eventId: String): Boolean {
+        val document = firestore.collection("Events").document(eventId).get().await()
+        return document.exists()
+    }
+    override suspend fun setIdEvent(eventId: String): Boolean {
+        val document = firestore.collection("Events").document(eventId).get().await()
+        if(document.exists()){
+            this.exists(eventId)
+            return true
+        }else{
+            return false
+        }
+    }
+
+    override suspend fun getEventInfo(): Event? {
 
         val document = firestore.collection("Events").document(eventId).get()?.await()
 
@@ -23,11 +39,23 @@ class EventFirebaseImpl : EventRemote {
                  name = data?.get("name") as String,
                  organizer = data?.get("organizer") as String,
                  start_time = data?.get("start_time") as String,
-
+                 imageRef = data?.get("imageRef") as String
             )
             return eventInfo
         }
         return null
 
+    }
+    suspend fun getImageUrl(imageRef: String): String? {
+        val storageRef = storage.getReferenceFromUrl(imageRef)
+        var url: String? = null
+
+        storageRef.downloadUrl.addOnSuccessListener { uri ->
+            url = uri.toString()
+        }.addOnFailureListener {
+            // Handle any errors
+        }
+
+        return url
     }
 }

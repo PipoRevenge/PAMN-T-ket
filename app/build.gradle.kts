@@ -53,6 +53,7 @@ android {
 
 dependencies {
     implementation("androidx.gridlayout:gridlayout:1.0.0")
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
     val appcompat_version = "1.6.1"
     val navVersion = "2.7.1"
 

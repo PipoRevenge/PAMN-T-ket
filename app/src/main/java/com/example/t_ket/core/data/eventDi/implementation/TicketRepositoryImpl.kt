@@ -1,23 +1,24 @@
-package com.example.t_ket.core.data.ticketDi.implementation
+package com.example.t_ket.core.data.eventDi.implementation
 
 import com.example.t_ket.core.domain.model.Ticket
-import com.example.t_ket.core.data.ticketDi.remote.implementation.TicketFirebaseImpl
-import com.example.t_ket.core.data.ticketDi.remote.repository.TicketRemote
-import com.example.t_ket.core.data.ticketDi.repository.TicketRepository
-import com.example.t_ket.core.data.ticketDi.repository.TicketUpdateListener
+import com.example.t_ket.core.data.eventDi.remote.implementation.TicketFirebaseImpl
+import com.example.t_ket.core.data.eventDi.remote.repository.TicketRemote
+import com.example.t_ket.core.data.eventDi.repository.TicketRepository
+import com.example.t_ket.core.data.eventDi.repository.TicketUpdateListener
 
-class TicketRepositoryImpl() : TicketRepository, TicketUpdateListener {
+class TicketRepositoryImpl(val eventId: String) : TicketRepository, TicketUpdateListener {
     private val remote: TicketRemote = TicketFirebaseImpl(this)
     private val tickets = mutableMapOf<String, Ticket>()
-    override suspend fun setIdEvent(id_event: String) {
-        remote.setIdEvent(id_event)
+    override suspend fun setIdEvent() {
+        remote.setIdEvent(eventId)
         tickets.putAll(remote.getTicketsFromFirebase())
         // Aquí deberías también establecer el id del evento en tu fuente de datos local
     }
 
     override fun getAllTickets(): MutableMap<String, Ticket> {
-
+        tickets.putAll(remote.getTicketsFromFirebase())
         return tickets
+
         // Aquí deberías también obtener todos los tickets de tu fuente de datos local
     }
 

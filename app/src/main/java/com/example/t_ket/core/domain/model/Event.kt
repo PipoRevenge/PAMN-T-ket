@@ -9,4 +9,5 @@ data class Event(
     var name: String? = "",
     var organizer: String? = "",
     var start_time: String? ="",
+    var imageRef:  String?= ""
 )

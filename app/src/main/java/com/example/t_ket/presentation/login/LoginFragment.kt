@@ -1,5 +1,6 @@
 package com.example.t_ket.presentation.login
 
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,8 +14,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.t_ket.R
 import com.example.t_ket.databinding.FragmentEventInfoBinding
 import com.example.t_ket.databinding.FragmentLoginBinding
-
-
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null

@@ -1,13 +1,16 @@
 package com.example.t_ket.core.data.eventDi.implementation
 
+import android.util.Log
 import com.example.t_ket.core.data.eventDi.repository.EventRepository
 import com.example.t_ket.core.domain.model.Event
 import com.example.t_ket.core.data.eventDi.remote.implementation.EventFirebaseImpl
 import com.example.t_ket.core.data.eventDi.repository.TicketRepository
 import com.example.t_ket.core.data.eventDi.repository.UserRepository
+import dagger.hilt.InstallIn
+import javax.inject.Inject
 
 
-class EventImpl() : EventRepository  {
+class EventImpl @Inject constructor() : EventRepository  {
     private val remote: EventFirebaseImpl = EventFirebaseImpl()
     private lateinit var ticketRepository: TicketRepository
     private lateinit var userRepository: UserRepository
@@ -16,10 +19,12 @@ class EventImpl() : EventRepository  {
 
     override suspend fun initEvent(idEvent: String) : Boolean{
         if(remote.setIdEvent(idEvent)){
+            Log.d("mio", idEvent)
             ticketRepository= TicketRepositoryImpl(idEvent)
             ticketRepository.setIdEvent()
             userRepository = UserRepositoryImpl(idEvent)
-            event = this.getEventInfo()!!
+            Log.d("mio", "Se hizo")
+            event = remote.getEventInfo()!!
         }
         return false
 

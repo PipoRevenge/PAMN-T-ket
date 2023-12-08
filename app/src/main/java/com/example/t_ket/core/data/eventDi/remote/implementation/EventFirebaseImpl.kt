@@ -17,7 +17,8 @@ class EventFirebaseImpl : EventRemote {
     override suspend fun setIdEvent(eventId: String): Boolean {
         val document = firestore.collection("Events").document(eventId).get().await()
         if(document.exists()){
-            this.exists(eventId)
+            this.eventId = eventId
+
             return true
         }else{
             return false

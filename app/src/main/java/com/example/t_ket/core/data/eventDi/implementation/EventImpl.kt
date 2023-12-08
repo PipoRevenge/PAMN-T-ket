@@ -23,6 +23,7 @@ class EventImpl @Inject constructor() : EventRepository  {
             ticketRepository= TicketRepositoryImpl(idEvent)
             ticketRepository.setIdEvent()
             userRepository = UserRepositoryImpl(idEvent)
+
             Log.d("mio", "Se hizo")
             event = remote.getEventInfo()!!
         }

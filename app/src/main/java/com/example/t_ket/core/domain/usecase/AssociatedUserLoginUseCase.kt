@@ -18,15 +18,11 @@ class AssociatedUserLoginUseCase @Inject constructor(private val eventRepository
         if(codigo == ""){
             return false
         }
-        //Arreglar el codigo
-        Log.d("Mio2","Voy a entrar")
-        Log.d("Mio2",codigo)
-        eventRepository.initEvent(codigo)
-        Log.d("Mio2","Sali")
+        val code = codigo.substring(0,3)
+        eventRepository.initEvent(code)
+        val userRepository =eventRepository.getUserRepository()
+        return userRepository.checkIsStaff(codigo)
 
-        return eventRepository.getUserRepository().checkIsStaff(codigo)
-
-        //Log.d("Pipo", eventRepository.getEventInfo().toString())
 
     }
 }

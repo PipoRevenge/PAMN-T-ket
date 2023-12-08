@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             val ticketByDni = ticketRepository.getTicketByDni("54173430N")
             Log.d("MainActivity", "getTicketByDni: $ticketByDni")
 
-            ticketRepository.updateStatusTicket("UOT001", false)
+            ticketRepository.updateStatusTicket("UOT001", true)
             Log.d("MainActivity", "updateStatusTicket: UOT001, false")
 
 

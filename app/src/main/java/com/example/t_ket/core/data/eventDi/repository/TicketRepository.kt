@@ -1,9 +1,9 @@
-package com.example.t_ket.core.data.ticketDi.repository
+package com.example.t_ket.core.data.eventDi.repository
 
 import com.example.t_ket.core.domain.model.Ticket
 
 interface TicketRepository {
-    suspend fun setIdEvent(id_event:String)
+    suspend fun setIdEvent()
     fun getAllTickets(): MutableMap<String, Ticket>
     suspend fun getTicketById(id_ticket:String) : Ticket?
     suspend fun getTicketsFromGroup(id_group: String ) : List<Ticket>

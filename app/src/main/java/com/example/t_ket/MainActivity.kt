@@ -1,5 +1,6 @@
 package com.example.t_ket
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,44 +8,58 @@ import androidx.lifecycle.lifecycleScope
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.t_ket.core.data.eventDi.implementation.EventImpl
 import com.example.t_ket.core.data.eventDi.repository.EventRepository
-import com.example.t_ket.core.data.ticketDi.implementation.TicketRepositoryImpl
-import com.example.t_ket.core.data.ticketDi.repository.TicketRepository
+import com.example.t_ket.core.data.eventDi.implementation.TicketRepositoryImpl
+import com.example.t_ket.core.data.eventDi.repository.TicketRepository
+import com.example.t_ket.core.domain.repository.UserUseCaseRepository
+import com.example.t_ket.core.domain.usecase.AssociatedUserLoginUseCase
+import com.example.t_ket.core.domain.usecase.TicketInteractorImpl
 import com.example.t_ket.databinding.ActivityMainBinding
-import com.example.t_ket.presentation.EventInfo.EventInfoFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
 
     private lateinit var navController: NavController
 
-    private lateinit var ticketRepository: TicketRepository
 
-    private lateinit var eventRepository: EventRepository
+
+
+    @Inject
+    lateinit var eventRepository: EventRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
         //Prubas pipo
-        ticketRepository = TicketRepositoryImpl() // Asume que TicketRepositoryImpl es la implementación de tu interfaz
-        eventRepository = EventImpl()
-
-        // Ahora puedes llamar a las funciones de la interfaz
+        //eventRepository = EventImpl()
+        //ticketRepository = eventRepository.getTicketRepository()
 
 
-        //pipoPruebas()
+
+
+
+
+        //pipoPrubas()
+
+
+    }
+
+    private fun pipoPrubas(){
         lifecycleScope.launch (Dispatchers.IO){
-            ticketRepository.setIdEvent("UOT")
+            eventRepository.initEvent("UOT")
             Log.d("MainActivity", "setIdEvent: UOT")
-
+            val ticketRepository =eventRepository.getTicketRepository()
             val allTickets = ticketRepository.getAllTickets()
             Log.d("MainActivity", "getAllTickets: $allTickets")
 
@@ -57,16 +72,17 @@ class MainActivity : AppCompatActivity() {
             val ticketByDni = ticketRepository.getTicketByDni("54173430N")
             Log.d("MainActivity", "getTicketByDni: $ticketByDni")
 
-            ticketRepository.updateStatusTicket("UOT001", false)
+            ticketRepository.updateStatusTicket("UOT001", true)
             Log.d("MainActivity", "updateStatusTicket: UOT001, false")
 
-            eventRepository.setEventId("UOT")
 
             val eventInfo = eventRepository.getEventInfo()
             Log.d("MainActivity", "getTicketByDni: $eventInfo")
 
 
         }
+
+
 
     }
 

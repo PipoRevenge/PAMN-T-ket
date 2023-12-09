@@ -5,23 +5,26 @@ import com.example.t_ket.core.data.eventDi.repository.EventRepository
 import com.example.t_ket.core.data.eventDi.repository.TicketRepository
 
 import com.example.t_ket.core.domain.repository.TicketUseCaseRepository
+import org.json.JSONObject
 import javax.inject.Inject
 
 //Aqui va las propias interacciones con el modelo en cuestion usando el repositorio para los datos
 
-public class TicketInteractorImpl @Inject constructor(public val eventRepository: EventRepository) : TicketUseCaseRepository {
+class TicketInteractorImpl @Inject constructor(public val eventRepository: EventRepository) : TicketUseCaseRepository {
     private val ticketRepository : TicketRepository =  eventRepository.getTicketRepository()
 
     override fun getAllTickets(): List<Ticket> {
         TODO("Not yet implemented")
     }
 
-    override fun getTicketById(): Ticket {
-        TODO("Not yet implemented")
+    override suspend fun getTicketById(idTicket: String): Ticket? {
+       return ticketRepository.getTicketById(idTicket)
     }
 
     override suspend fun checkTicket(ticketInfo: String): Boolean? {
-        val id_ticket = "" // String o JSON con un campo
+        //Que pasa si esta en grupo
+        val jsonObject = JSONObject(ticketInfo)
+        val id_ticket = jsonObject.getString("id")
         val ticket = ticketRepository.getTicketById(id_ticket)
         if( ticket != null){
             if(ticket.status == false){
@@ -34,16 +37,16 @@ public class TicketInteractorImpl @Inject constructor(public val eventRepository
 
     }
 
-    override fun getValidatedTickets(): List<Ticket> {
-        TODO("Not yet implemented")
+    override suspend fun getValidatedTickets(): List<Ticket> {
+        return ticketRepository.getValidatedTickets()
     }
 
-    override fun getNotValidatedTickets(): List<Ticket> {
-        TODO("Not yet implemented")
+    override suspend fun getNotValidatedTickets(): List<Ticket> {
+        return ticketRepository.getInvalidatedTickets()
     }
 
-    override fun getGroupTickets(): List<Ticket> {
-        TODO("Not yet implemented")
+    override suspend fun getGroupTickets(idGrop:String): List<Ticket> {
+        return ticketRepository.getTicketsFromGroup(idGrop)
     }
 
 }

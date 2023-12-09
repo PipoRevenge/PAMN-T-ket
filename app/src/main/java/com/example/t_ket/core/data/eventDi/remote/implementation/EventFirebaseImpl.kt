@@ -42,7 +42,7 @@ class EventFirebaseImpl : EventRemote {
         return null
 
     }
-    suspend fun getImageUrl(imageRef: String): String? {
+    override suspend fun getImageUrl(imageRef: String): String? {
         val storageRef = storage.getReferenceFromUrl(imageRef)
         var url: String? = null
 

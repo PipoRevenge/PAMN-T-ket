@@ -35,8 +35,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
 
-
-
     @Inject
     lateinit var eventRepository: EventRepository
 
@@ -59,6 +57,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //pipoPrubas()
+        ///subirEventos()
 
 
     }
@@ -93,51 +92,8 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    /*
-    data class CreaEvento(
-        var capacity: Int? = null,
-        var date: String? = "",
-        var end_time: String? ="",
-        var name: String? = "",
-        var organizer: String? = "",
-        var start_time: String? ="",
-        var imageRef:  String?= ""
-    )
 
-    data class Ticket2(
-        var status: Boolean? = null, // Validado o no validado
-        var fullName: String? = "", // Propietario del ticket nombre completo
-        var dni: String? = "", // Identificador del propietario
-        var idGroup: String? = "", // Identificador del grupo (si existe)
-    )
-    //Borrar cuando esten subidos:
-    fun subirEventos(){
-        val db = FirebaseFirestore.getInstance()
-        val idEvento = "TOM"
-
-        val tomorrowlandEvent = CreaEvento(
-            capacity = 1000,
-            date = "2023-01-01", // Fecha del evento (usando un formato YYYY-MM-DD)
-            end_time = "23:00",
-            name = "Tomorrowland",
-            organizer = "We Are One",
-            start_time = "20:00",
-            imageRef = "",
-
-        )
-        db.collection("Events").document(idEvento).set(tomorrowlandEvent)
-
-    }
-
-
-    fun añadirTicketsaEvento(idEvent:String, ticket:Ticket ){
-
-        val db = FirebaseFirestore.getInstance()
-
-
-    }
-
-    */
+//////////////////////////
 
     private fun initUI() {
         initNavigation()

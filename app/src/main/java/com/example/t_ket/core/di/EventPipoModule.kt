@@ -1,6 +1,7 @@
 package com.example.t_ket.core.di
 import com.example.t_ket.core.data.eventDi.implementation.EventImpl
 import com.example.t_ket.core.data.eventDi.repository.EventRepository
+import com.example.t_ket.core.domain.usecase.TicketInteractorImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +16,9 @@ object EventPipoModule {
     fun provideEventRepository(): EventRepository {
         return EventImpl()
     }
-
+    @Provides
+    @Singleton
+    fun provideTicketInteractor(eventRepository: EventRepository): TicketInteractorImpl {
+        return TicketInteractorImpl(eventRepository)
+    }
 }

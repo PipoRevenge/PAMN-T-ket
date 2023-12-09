@@ -10,4 +10,8 @@ class EventInfoGetter @Inject constructor(public val eventRepository: EventRepos
      suspend fun getEventInfo(): Event? {
          return eventRepository.getEventInfo()
     }
+    suspend fun getNumberOfValidatedTickets(): Int {
+        return eventRepository.getTicketRepository().getValidatedTickets().size
+
+    }
 }

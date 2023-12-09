@@ -6,4 +6,5 @@ interface EventRemote {
     suspend fun getEventInfo(): Event?
     suspend fun setIdEvent(eventId: String): Boolean
 
+    suspend fun getImageUrl(imageRef: String): String?
 }

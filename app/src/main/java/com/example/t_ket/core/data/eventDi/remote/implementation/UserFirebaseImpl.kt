@@ -1,6 +1,6 @@
-package com.example.t_ket.core.data.userDi.remote.implementation
+package com.example.t_ket.core.data.eventDi.remote.implementation
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.t_ket.core.data.userDi.remote.repository.UserRemote
+import com.example.t_ket.core.data.eventDi.remote.repository.UserRemote
 import kotlinx.coroutines.tasks.await
 
 class UserFirebaseImpl(): UserRemote {

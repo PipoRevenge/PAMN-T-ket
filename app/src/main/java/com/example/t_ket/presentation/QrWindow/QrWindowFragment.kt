@@ -10,6 +10,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.t_ket.R
+import com.example.t_ket.core.data.eventDi.implementation.EventImpl
+import com.example.t_ket.core.data.eventDi.repository.EventRepository
 import com.example.t_ket.core.domain.repository.TicketUseCaseRepository
 import com.example.t_ket.core.domain.usecase.TicketInteractorImpl
 import com.example.t_ket.databinding.FragmentQrWindowBinding
@@ -20,14 +22,19 @@ import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class QrWindowFragment : Fragment() {
 
     private var _binding: FragmentQrWindowBinding? = null
     private val binding get() = _binding!!
     private lateinit var barcodeView: DecoratedBarcodeView
-    private val ticketInteractor : TicketUseCaseRepository = TicketInteractorImpl()
+    @Inject
+    lateinit var ticketInteractor: TicketInteractorImpl
+    //private val ticketInteractor2 : TicketUseCaseRepository = TicketInteractorImpl()
     private val qrResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val scanningResult = IntentIntegrator.parseActivityResult(result.resultCode, result.data)

@@ -1,11 +1,11 @@
-package com.example.t_ket.core.data.ticketDi.remote.implementation
+package com.example.t_ket.core.data.eventDi.remote.implementation
 
 import android.content.ContentValues
 import android.util.Log
 
 import com.example.t_ket.core.domain.model.Ticket
-import com.example.t_ket.core.data.ticketDi.implementation.TicketRepositoryImpl
-import com.example.t_ket.core.data.ticketDi.remote.repository.TicketRemote
+import com.example.t_ket.core.data.eventDi.implementation.TicketRepositoryImpl
+import com.example.t_ket.core.data.eventDi.remote.repository.TicketRemote
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await

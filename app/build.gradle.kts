@@ -1,7 +1,10 @@
 plugins {
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+
 }
 
 android {
@@ -34,6 +37,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
@@ -53,11 +57,14 @@ android {
 
 dependencies {
     implementation("androidx.gridlayout:gridlayout:1.0.0")
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
     val appcompat_version = "1.6.1"
     val navVersion = "2.7.1"
 
     //For Pipo
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
 
     //Navegation requirements
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
@@ -98,4 +105,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+}
+kapt {
+    correctErrorTypes = true
 }

@@ -31,6 +31,7 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
         if (document != null) {
             val data = document.data
             return Ticket(
+                id = document.id ,
                 status = data?.get("status") as Boolean,
                 fullName = data["fullName"] as String,
                 dni = data["dni"] as String,
@@ -48,6 +49,7 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
             for (document in result) {
                 val data = document.data
                 val ticket = Ticket(
+                    id = document.id ,
                     status = data["status"] as Boolean,
                     fullName = data["fullName"] as String,
                     dni = data["dni"] as String,
@@ -66,6 +68,7 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
             for (document in result) {
                 val data = document.data
                 val ticket = Ticket(
+                    id = document.id ,
                     status = data["status"] as Boolean,
                     fullName = data["fullName"] as String,
                     dni = data["dni"] as String,
@@ -97,6 +100,7 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
                     for (document in snapshots!!) {
                         val data = document.data
                         val ticket = Ticket(
+                            id = document.id ,
                             status = data["status"] as Boolean,
                             fullName = data["fullName"] as String,
                             dni = data["dni"] as String,
@@ -132,6 +136,7 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
             for (document in result) {
                 val data = document.data
                 val ticket = Ticket(
+                    id = document.id ,
                     status = data["status"] as Boolean,
                     fullName = data["fullName"] as String,
                     dni = data["dni"] as String,

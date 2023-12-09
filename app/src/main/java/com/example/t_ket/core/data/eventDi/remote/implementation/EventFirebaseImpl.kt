@@ -10,10 +10,7 @@ class EventFirebaseImpl : EventRemote {
     private val firestore = FirebaseFirestore.getInstance()
     private val storage = FirebaseStorage.getInstance()
     private lateinit var eventId :String
-    suspend fun exists(eventId: String): Boolean {
-        val document = firestore.collection("Events").document(eventId).get().await()
-        return document.exists()
-    }
+
     override suspend fun setIdEvent(eventId: String): Boolean {
         val document = firestore.collection("Events").document(eventId).get().await()
         if(document.exists()){
@@ -34,9 +31,7 @@ class EventFirebaseImpl : EventRemote {
              val eventInfo = Event(
                  capacity = (data?.get("capacity") as? Long)?.toInt() ?:0,
                  date = data?.get("date") as String,
-                 description = data?.get("description") as String ,
                  end_time = data?.get("end_time") as String,
-                 location = data?.get("location") as String,
                  name = data?.get("name") as String,
                  organizer = data?.get("organizer") as String,
                  start_time = data?.get("start_time") as String,

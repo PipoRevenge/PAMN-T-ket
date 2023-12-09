@@ -20,8 +20,11 @@ class AssociatedUserLoginUseCase @Inject constructor(private val eventRepository
         }
         val code = codigo.substring(0,3)
         eventRepository.initEvent(code)
-        val userRepository =eventRepository.getUserRepository()
-        return userRepository.checkIsStaff(codigo)
+        if(eventRepository.getUserRepository().checkIsStaff(codigo)) {
+            eventRepository.getUserRepository().setUser(codigo)
+            return true
+        }
+        return false
 
 
     }

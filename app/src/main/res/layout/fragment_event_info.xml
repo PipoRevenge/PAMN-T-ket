@@ -90,9 +90,9 @@
 
                 <!-- Hora de inicio -->
                 <TextView
+                    android:id="@+id/horaIn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hora de inicio: x"
                     android:textAlignment="center"
 
                     android:fontFamily="@font/ayaka"
@@ -101,9 +101,9 @@
                     app:layout_gravity="center"
                     />
                 <TextView
+                    android:id="@+id/horaFin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hora de final: x"
                     android:textAlignment="center"
 
                     android:fontFamily="@font/ayaka"
@@ -114,6 +114,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/aforo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Aforo disponible: x"
@@ -128,9 +129,9 @@
 
                 <!-- Entradas validas -->
                 <TextView
+                    android:id="@+id/Validadas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Entradas validas: x"
                     android:textAlignment="center"
 
                     android:fontFamily="@font/ayaka"
@@ -144,9 +145,9 @@
 
                 <!-- Entradas no validas -->
                 <TextView
+                    android:id="@+id/noValid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Entradas no validas: x"
                     android:textAlignment="center"
 
                     android:fontFamily="@font/ayaka"

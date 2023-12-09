@@ -1,6 +1,5 @@
 package com.example.t_ket.core.domain.usecase;
 import com.example.t_ket.core.domain.model.Ticket
-import com.example.t_ket.core.data.eventDi.implementation.TicketRepositoryImpl
 import com.example.t_ket.core.data.eventDi.repository.EventRepository
 import com.example.t_ket.core.data.eventDi.repository.TicketRepository
 
@@ -14,7 +13,8 @@ class TicketInteractorImpl @Inject constructor(public val eventRepository: Event
     private val ticketRepository : TicketRepository =  eventRepository.getTicketRepository()
 
     override fun getAllTickets(): List<Ticket> {
-        TODO("Not yet implemented")
+
+        return ticketRepository.getAllTickets().values.toList()
     }
 
     override suspend fun getTicketById(idTicket: String): Ticket? {

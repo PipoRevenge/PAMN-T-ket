@@ -61,10 +61,13 @@ dependencies {
     val appcompat_version = "1.6.1"
     val navVersion = "2.7.1"
 
-    //For Pipo
+    //dAGGER hILT
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    //Splash Screen requirements
+    implementation ("androidx.core:core-splashscreen:1.0.0")
 
     //Navegation requirements
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")

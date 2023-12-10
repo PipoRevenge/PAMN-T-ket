@@ -51,15 +51,8 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
         val result = eventRef?.whereEqualTo("idGroup", id_group)?.get()?.await()
         if (result != null) {
             for (document in result) {
-                val data = document.data
-                val ticket = Ticket(
-                    id = document.id ,
-                    status = data["status"] as Boolean,
-                    fullName = data["fullName"] as String,
-                    dni = data["dni"] as String,
-                    //checkIn = data["checkIn"] as Date?,
-                    idGroup = data["idGroup"] as String
-                )
+
+                val ticket = createTicketFromDocument(document)
                 tickets.add(ticket)
             }
         }
@@ -122,7 +115,6 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
         val result = eventRef?.whereEqualTo("status", validation)?.get()?.await()
         if (result != null) {
             for (document in result) {
-                val data = document.data
                 val ticket = createTicketFromDocument(document)
                 tickets.add(ticket)
             }

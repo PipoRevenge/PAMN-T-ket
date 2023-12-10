@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,17 +18,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.t_ket.R
 import com.example.t_ket.core.domain.model.Event
 import com.example.t_ket.core.domain.model.Ticket
+import com.example.t_ket.core.domain.usecase.TicketInteractorImpl
 import com.example.t_ket.databinding.FragmentEventInfoBinding
 import com.example.t_ket.databinding.FragmentTicketListBinding
 import com.example.t_ket.presentation.TicketList.adapter.TicketListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TicketListFragment : Fragment() {
     private var _binding: FragmentTicketListBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: TicketListAdapter
+    @Inject
+    lateinit var ticketInteractor: TicketInteractorImpl
     private val TicketListViewModel by viewModels<TicketListViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +49,16 @@ class TicketListFragment : Fragment() {
     }
 
     private fun initList() {
-        adapter = TicketListAdapter()
+        adapter = TicketListAdapter(onItemSelected = {
+            lifecycleScope.launch {
+                it.id?.let { it1 ->
+
+                    Log.d("AAAAAAAAAAAAAAAAAAAAAAAAAA", "id pasada: $it1")
+                    Toast.makeText(requireContext(),  it1 , Toast.LENGTH_LONG).show()
+                    ticketInteractor.checkTicket("{\"id\":\"$it1\"}")
+                     }
+            }
+        })
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
     }

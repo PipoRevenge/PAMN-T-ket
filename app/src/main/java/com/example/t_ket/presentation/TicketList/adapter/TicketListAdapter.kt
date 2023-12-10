@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.t_ket.R
 import com.example.t_ket.core.domain.model.Ticket
 
-class TicketListAdapter(private var ticketList: List<Ticket> = emptyList()):
+class TicketListAdapter(private var ticketList: List<Ticket> = emptyList(),
+                        private val onItemSelected:(Ticket) -> Unit):
     RecyclerView.Adapter<TicketListViewHolder>() {
 
     fun updateList(list:List<Ticket>){
@@ -25,7 +26,7 @@ class TicketListAdapter(private var ticketList: List<Ticket> = emptyList()):
     override fun getItemCount() = ticketList.size
 
     override fun onBindViewHolder(holder: TicketListViewHolder, position: Int) {
-        holder.render(ticketList[position])
+        holder.render(ticketList[position],onItemSelected )
     }
 
 }

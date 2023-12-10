@@ -9,10 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.t_ket.R
+import com.example.t_ket.core.domain.model.Event
 import com.example.t_ket.databinding.FragmentEventInfoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class EventInfoFragment : Fragment() {
 
     private var _binding: FragmentEventInfoBinding? = null
@@ -24,7 +27,41 @@ class EventInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        EventInfoViewModel.getInfo()
         _binding = FragmentEventInfoBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initObservers()
+    }
+
+    private fun initObservers() {
+        EventInfoViewModel.eventInfo.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is Event -> {
+                    with(binding){
+                        aforo.text="aforo: ${state.capacity}"
+                        horaIn.text="Hora de inicio: ${state.start_time}"
+                        horaFin.text="Hora de final: ${state.end_time}"
+                        nombreevento.text="${state.name}"
+                        noValid.text="Entradas no validas: x"
+                        Validadas.text="Entradas validadas: x"
+                        Log.d("TAG", "He pasado por aqui")
+                    }
+                }
+                null -> {
+                    with(binding){
+                        Log.d("TAG", "Error Info")
+                    }
+                }
+            }
+        }
+    }
+
+
+
 }

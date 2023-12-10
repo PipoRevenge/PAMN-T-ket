@@ -1,4 +1,6 @@
 plugins {
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
@@ -55,7 +57,10 @@ dependencies {
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     val appcompat_version = "1.6.1"
     val navVersion = "2.7.1"
-
+    //dAGGER hILT
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
     //For Pipo
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 

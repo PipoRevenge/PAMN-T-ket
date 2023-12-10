@@ -15,8 +15,9 @@ import com.example.t_ket.R
 import com.example.t_ket.databinding.FragmentEventInfoBinding
 import com.example.t_ket.databinding.FragmentTicketListBinding
 import com.example.t_ket.presentation.TicketList.adapter.TicketListAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class TicketListFragment : Fragment() {
     private var _binding: FragmentTicketListBinding? = null
     private val binding get() = _binding!!

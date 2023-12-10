@@ -7,14 +7,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.example.t_ket.core.data.userDi.repository.UserRepository
 import com.example.t_ket.core.data.userDi.implementation.UserRepositoryImpl
+import com.example.t_ket.core.domain.repository.EventUseCaseRepository
 
 import com.example.t_ket.core.domain.repository.TicketUseCaseRepository
+import javax.inject.Inject
 
 //Aqui va las propias interacciones con el modelo en cuestion usando el repositorio para los datos
 
-public class TicketInteractorImpl: TicketUseCaseRepository {
+public class TicketInteractorImpl @Inject constructor() : TicketUseCaseRepository {
     private val ticketRepository : TicketRepository = TicketRepositoryImpl()
-
     override fun getAllTickets(): List<Ticket> {
         TODO("Not yet implemented")
     }
@@ -34,6 +35,7 @@ public class TicketInteractorImpl: TicketUseCaseRepository {
                 // Imprimir solo el valor del segundo match
                 if (index == 1) {
                     Log.d("AAAAAAAAAAAAAAAAA", "$value")
+                    ticketRepository.updateStatusTicket(value, true)
                 }
             }
             return true

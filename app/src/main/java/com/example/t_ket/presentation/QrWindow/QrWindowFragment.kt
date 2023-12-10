@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.t_ket.R
+import com.example.t_ket.core.domain.repository.TicketUseCaseRepository
 import com.example.t_ket.core.domain.usecase.TicketInteractorImpl
 import com.example.t_ket.databinding.FragmentQrWindowBinding
 import com.google.zxing.BarcodeFormat
@@ -30,7 +31,7 @@ class QrWindowFragment : Fragment( ) {
     private val binding get() = _binding!!
     private lateinit var barcodeView: DecoratedBarcodeView
     @Inject
-    lateinit var ticketInteractor: TicketInteractorImpl
+    lateinit var ticketInteractor: TicketUseCaseRepository
     private val qrResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val scanningResult = IntentIntegrator.parseActivityResult(result.resultCode, result.data)

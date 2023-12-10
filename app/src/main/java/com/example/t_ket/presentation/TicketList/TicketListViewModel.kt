@@ -14,9 +14,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TicketListViewModel @Inject constructor(
-    private val eventRepository: EventRepository
 ) : ViewModel() {
-    private val ticketInteractor : TicketUseCaseRepository =  TicketInteractorImpl(eventRepository)
+    @Inject
+    lateinit var ticketInteractor : TicketUseCaseRepository
+
     private val _ticketState: MutableLiveData<Boolean> = MutableLiveData()
     val ticketState: LiveData<Boolean>
         get() = _ticketState
@@ -24,7 +25,7 @@ class TicketListViewModel @Inject constructor(
     fun signUp(code: String) {
         viewModelScope.launch {
             var result = ticketInteractor.checkTicketById(code)
-            _ticketState.value = result
+            _ticketState.value = result!!
             Log.d("TAG" ,"Result: $result")
             Log.d("TAG" ,"Comms")
         }

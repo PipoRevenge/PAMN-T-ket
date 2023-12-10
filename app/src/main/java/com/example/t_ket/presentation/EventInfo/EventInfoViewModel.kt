@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.t_ket.core.data.eventDi.repository.EventRepository
 import com.example.t_ket.core.domain.model.Event
+import com.example.t_ket.core.domain.repository.EventUseCaseRepository
 import com.example.t_ket.core.domain.repository.UserUseCaseRepository
 import com.example.t_ket.core.domain.usecase.AssociatedUserLoginUseCase
 import com.example.t_ket.core.domain.usecase.EventInfoGetter
@@ -19,9 +20,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventInfoViewModel @Inject constructor(
-    private val eventRepository: EventRepository
+
 ) : ViewModel() {
-    private val eventsGet= EventInfoGetter(eventRepository)
+    @Inject
+    lateinit var eventsGet : EventUseCaseRepository
     private val _eventInfo: MutableLiveData<Event?> = MutableLiveData()
     val eventInfo: LiveData<Event?>
         get() = _eventInfo
@@ -45,7 +47,7 @@ class EventInfoViewModel @Inject constructor(
             Log.d("TAG" ,"Comms")
             _entradasNoValidas.value = eventsGet.getNumberOfNoValidatedTickets()
             _entradasValidadas.value = eventsGet.getNumberOfValidatedTickets()
-            _imageUrl.value = eventRepository.getImageUrl()
+            _imageUrl.value = eventsGet.getImgUrl()
 
         }
     }

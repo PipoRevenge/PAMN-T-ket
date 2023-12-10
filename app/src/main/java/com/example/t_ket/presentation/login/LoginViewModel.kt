@@ -14,9 +14,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val eventRepository: EventRepository
 ) : ViewModel()  {
-    private val userInteractor :UserUseCaseRepository = AssociatedUserLoginUseCase(eventRepository)
+    @Inject
+    lateinit var  userInteractor :UserUseCaseRepository
     private val _signUpState: MutableLiveData<Boolean> = MutableLiveData()
     val signUpState: LiveData<Boolean>
         get() = _signUpState

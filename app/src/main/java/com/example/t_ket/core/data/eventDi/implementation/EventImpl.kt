@@ -42,6 +42,7 @@ class EventImpl @Inject constructor() : EventRepository  {
     }
 
     override suspend fun getImageUrl(): String? {
+
         return event.imageRef?.let { remote.getImageUrl(it) }
     }
 

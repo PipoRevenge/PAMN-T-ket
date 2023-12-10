@@ -1,5 +1,6 @@
 package com.example.t_ket.core.data.eventDi.remote.implementation
 
+import android.util.Log
 import com.example.t_ket.core.data.eventDi.remote.repository.EventRemote
 import com.example.t_ket.core.domain.model.Event
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,7 +31,6 @@ class EventFirebaseImpl : EventRemote {
             val data = document.data
              val eventInfo = Event(
                  capacity = (data?.get("capacity") as? Long)?.toInt() ?:0,
-                 date = data?.get("date") as String,
                  end_time = data?.get("end_time") as String,
                  name = data?.get("name") as String,
                  organizer = data?.get("organizer") as String,
@@ -42,16 +42,14 @@ class EventFirebaseImpl : EventRemote {
         return null
 
     }
-    override suspend fun getImageUrl(imageRef: String): String? {
+    override suspend fun getImageUrl(imageRef: String): String {
         val storageRef = storage.getReferenceFromUrl(imageRef)
-        var url: String? = null
-
-        storageRef.downloadUrl.addOnSuccessListener { uri ->
-            url = uri.toString()
-        }.addOnFailureListener {
-            // Handle any errors
+        return try {
+            storageRef.downloadUrl.await().toString()
+        } catch (e: Exception) {
+            Log.e("Pipo", "Error al descargar la URL de la imagen", e)
+            throw e
         }
-
-        return url
     }
+
 }

@@ -23,7 +23,7 @@ class TicketListViewModel @Inject constructor(
 
     fun signUp(code: String) {
         viewModelScope.launch {
-            var result = ticketInteractor.checkTicket(code)
+            var result = ticketInteractor.checkTicketById(code)
             _ticketState.value = result
             Log.d("TAG" ,"Result: $result")
             Log.d("TAG" ,"Comms")

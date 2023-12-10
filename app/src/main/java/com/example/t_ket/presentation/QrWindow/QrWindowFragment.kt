@@ -41,7 +41,7 @@ class QrWindowFragment : Fragment( ) {
 
                 lifecycleScope.launch {
                     Toast.makeText(requireContext(), "TOTO PIOLA ", Toast.LENGTH_LONG).show()
-                    ticketInteractor.checkTicket(scanningResult.contents)
+                    ticketInteractor.checkTicketQr(scanningResult.contents)
                 }
             }
             // Volver a iniciar el escáner después de mostrar el resultado

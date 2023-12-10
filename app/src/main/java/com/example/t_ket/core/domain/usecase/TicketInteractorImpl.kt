@@ -21,13 +21,26 @@ class TicketInteractorImpl @Inject constructor(public val eventRepository: Event
        return ticketRepository.getTicketById(idTicket)
     }
 
-    override suspend fun checkTicket(ticketInfo: String): Boolean? {
+    override suspend fun checkTicketQr(ticketInfo: String): Boolean? {
         //Que pasa si esta en grupo
         val jsonObject = JSONObject(ticketInfo)
         val id_ticket = jsonObject.getString("id")
+        return checkTicketById(id_ticket)
+
+    }
+    override suspend fun checkTicketById(id_ticket: String): Boolean? {
+        //Que pasa si esta en grupo
+
         val ticket = ticketRepository.getTicketById(id_ticket)
         if( ticket != null){
-            if(ticket.status == false){
+            if(ticket.idGroup !=""){
+                val listTickets =ticketRepository.getTicketsFromGroup(ticket.idGroup)
+                for (ticket2: Ticket in listTickets) {
+                    ticketRepository.updateStatusTicket(ticket2.id,true)
+                }
+                return true
+            }
+            else if(ticket.status == false){
                 ticketRepository.updateStatusTicket(id_ticket,true)
                 return true
             }

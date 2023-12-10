@@ -7,6 +7,7 @@ import com.example.t_ket.core.domain.model.Ticket
 import com.example.t_ket.core.data.eventDi.implementation.TicketRepositoryImpl
 import com.example.t_ket.core.data.eventDi.remote.repository.TicketRemote
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
@@ -24,20 +25,23 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
         }
         return eventRef != null
     }
+    private fun createTicketFromDocument(document: DocumentSnapshot): Ticket {
+        val data = document.data
+        return Ticket(
+            id = document.id,
+            status = data?.get("status") as Boolean,
+            fullName = data["fullName"] as String,
+            dni = data["dni"] as String,
+            //checkIn = data["checkIn"] as Date?,
+            idGroup = data["idGroup"] as String
+        )
+    }
 
     override suspend fun getTicketById(id_ticket: String): Ticket? {
 
         val document = eventRef?.document(id_ticket)?.get()?.await()
         if (document != null) {
-            val data = document.data
-            return Ticket(
-                id = document.id ,
-                status = data?.get("status") as Boolean,
-                fullName = data["fullName"] as String,
-                dni = data["dni"] as String,
-                //checkIn = data["checkIn"] as Date?,
-                idGroup = data["idGroup"] as String?
-            )
+            return createTicketFromDocument(document)
         }
         return null
     }
@@ -54,7 +58,7 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
                     fullName = data["fullName"] as String,
                     dni = data["dni"] as String,
                     //checkIn = data["checkIn"] as Date?,
-                    idGroup = data["idGroup"] as String?
+                    idGroup = data["idGroup"] as String
                 )
                 tickets.add(ticket)
             }
@@ -66,16 +70,7 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
         val result = eventRef?.whereEqualTo("dni", dni_ticket)?.get()?.await()
         if (result != null) {
             for (document in result) {
-                val data = document.data
-                val ticket = Ticket(
-                    id = document.id ,
-                    status = data["status"] as Boolean,
-                    fullName = data["fullName"] as String,
-                    dni = data["dni"] as String,
-                    //checkIn = data["checkIn"] as Date?,
-                    idGroup = data["idGroup"] as String?
-                )
-                return ticket
+                 return createTicketFromDocument(document)
             }
         }
         return null
@@ -99,14 +94,7 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
                     val snapshots = task.result
                     for (document in snapshots!!) {
                         val data = document.data
-                        val ticket = Ticket(
-                            id = document.id ,
-                            status = data["status"] as Boolean,
-                            fullName = data["fullName"] as String,
-                            dni = data["dni"] as String,
-                            //checkIn = data["checkIn"] as Date?,
-                            idGroup = data["idGroup"] as String?
-                        )
+                        val ticket =createTicketFromDocument(document)
                         tickets[document.id] = ticket
                     }
                     listener.onTicketsUpdated(tickets)
@@ -135,14 +123,7 @@ class TicketFirebaseImpl(val listener: TicketRepositoryImpl) : TicketRemote {
         if (result != null) {
             for (document in result) {
                 val data = document.data
-                val ticket = Ticket(
-                    id = document.id ,
-                    status = data["status"] as Boolean,
-                    fullName = data["fullName"] as String,
-                    dni = data["dni"] as String,
-                    //checkIn = data["checkIn"] as Date?,
-                    idGroup = data["idGroup"] as String?
-                )
+                val ticket = createTicketFromDocument(document)
                 tickets.add(ticket)
             }
         }

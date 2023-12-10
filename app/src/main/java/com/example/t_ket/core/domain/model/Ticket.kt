@@ -7,5 +7,5 @@ data class Ticket(
     var status: Boolean? = null, // Validado o no validado
     var fullName: String? = "", // Propietario del ticket nombre completo
     var dni: String? = "", // Identificador del propietario
-    var idGroup: String? = "", // Identificador del grupo (si existe)
+    var idGroup: String = "", // Identificador del grupo (si existe)
 )

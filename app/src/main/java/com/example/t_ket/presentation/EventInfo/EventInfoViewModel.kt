@@ -15,8 +15,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
 
+
+@HiltViewModel
 class EventInfoViewModel @Inject constructor(
     private val eventRepository: EventRepository
 ) : ViewModel() {
@@ -25,12 +26,27 @@ class EventInfoViewModel @Inject constructor(
     val eventInfo: LiveData<Event?>
         get() = _eventInfo
 
+    private val _entradasNoValidas: MutableLiveData<Int> = MutableLiveData(0)
+    val entradasNoValidas: LiveData<Int>
+        get() = _entradasNoValidas
+
+    private val _entradasValidadas: MutableLiveData<Int> = MutableLiveData(0)
+    val entradasValidadas: LiveData<Int>
+        get() = _entradasValidadas
+
+    private val _imageUrl: MutableLiveData<String> = MutableLiveData()
+    val imageUrl: LiveData<String>
+        get() = _imageUrl
     fun getInfo() {
         viewModelScope.launch {
             var info = eventsGet.getEventInfo()
             _eventInfo.value = info
             Log.d("TAG" ,"Result: $info")
             Log.d("TAG" ,"Comms")
+            _entradasNoValidas.value = eventsGet.getNumberOfNoValidatedTickets()
+            _entradasValidadas.value = eventsGet.getNumberOfValidatedTickets()
+            _imageUrl.value = eventRepository.getImageUrl()
+
         }
     }
 

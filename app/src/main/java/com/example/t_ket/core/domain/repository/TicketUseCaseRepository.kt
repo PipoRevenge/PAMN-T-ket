@@ -11,7 +11,8 @@ public interface TicketUseCaseRepository {
     suspend fun getNotValidatedTickets(): List<Ticket>
 
     //Validar ticket
-    suspend fun checkTicket(ticketInfo: String):Boolean?
     suspend fun getTicketById(idTicket: String): Ticket?
     suspend fun getGroupTickets(idGrop: String): List<Ticket>
+    suspend fun checkTicketById(id_ticket: String): Boolean?
+    suspend fun checkTicketQr(ticketInfo: String): Boolean?
 }

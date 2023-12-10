@@ -5,14 +5,16 @@ import com.example.t_ket.core.data.AppData
 import com.example.t_ket.core.data.eventDi.remote.repository.EventRemote
 import com.example.t_ket.core.domain.model.Event
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 
 class EventFirebaseImpl : EventRemote {
     val db = FirebaseFirestore.getInstance()
-
+    private val storage = FirebaseStorage.getInstance()
     override suspend fun getEventInfo() : Event {
         val eventInfo = Event()
         val docRef = db.collection("Events").document(AppData.event).get()?.await()
+
         if (docRef != null) {
             eventInfo.capacity = docRef.getLong("Capacity")?.toInt()
             eventInfo.name = docRef.getString("Name")
@@ -20,6 +22,9 @@ class EventFirebaseImpl : EventRemote {
             eventInfo.start_time = docRef.getString("StartTime")
             eventInfo.validatedTickets = 2
             eventInfo.notValidatedTickets = 2
+            val storageRef = docRef.getString("image")?.let { storage.getReferenceFromUrl(it) }
+            val url = storageRef?.downloadUrl?.await().toString()
+            eventInfo.image = url
             Log.d("FIREBASE", "$eventInfo")
             Log.d("ZZZZZZZZZ", "Exito al obtener los datos del evento")
         }

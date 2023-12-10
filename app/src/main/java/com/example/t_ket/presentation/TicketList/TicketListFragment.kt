@@ -27,7 +27,6 @@ class TicketListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        initRecyclerView()
         _binding = FragmentTicketListBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -60,13 +59,5 @@ class TicketListFragment : Fragment() {
         }
     }
 
-    fun initRecyclerView(){
-        with(binding){
 
-            binding.recyclerTickets.apply {
-                layoutManager = GridLayoutManager(context, 1)
-                adapter = ticketListAdapter
-            }
-        }
-    }
 }

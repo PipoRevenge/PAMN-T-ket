@@ -61,8 +61,17 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
-    //For Pipo
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+
+    //firebase dependencies
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
+
+    //Glide requirements
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    //Splash requirement
+    implementation ("androidx.core:core-splashscreen:1.0.0")
 
     //Navegation requirements
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")

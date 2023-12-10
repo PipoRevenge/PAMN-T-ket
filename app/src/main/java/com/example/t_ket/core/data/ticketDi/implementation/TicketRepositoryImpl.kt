@@ -19,6 +19,13 @@ class TicketRepositoryImpl() : TicketRepository, TicketUpdateListener {
         remote.updateStatusTicket(id_ticket, status)
         // Aquí deberías también actualizar el estado del ticket en tu fuente de datos local
     }
+
+    override suspend  fun getValidatedTickets(): List<Ticket> {
+        return remote.getValidatedTickets()
+    }
+    override suspend fun getNotValidatedTickets(): List<Ticket>{
+        return remote.getNotValidatedTickets()
+    }
     override fun onTicketsUpdated(newTickets: Map<String, Ticket>) {
         tickets.putAll(newTickets)
     }

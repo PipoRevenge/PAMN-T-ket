@@ -43,12 +43,11 @@ public class TicketInteractorImpl @Inject constructor() : TicketUseCaseRepositor
             return false
         }
     }
-    override fun getNotValidatedTickets(): List<Ticket> {
-        TODO("Not yet implemented")
+    override suspend fun getNotValidatedTickets(): List<Ticket> {
+        return ticketRepository.getNotValidatedTickets()
     }
-    override fun getValidatedTickets(): List<Ticket> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getValidatedTickets(): List<Ticket> {
+        return ticketRepository.getValidatedTickets()    }
 
     override fun getGroupTickets(): List<Ticket> {
         TODO("Not yet implemented")

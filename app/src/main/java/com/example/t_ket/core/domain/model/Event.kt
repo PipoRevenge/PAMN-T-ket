@@ -7,4 +7,5 @@ data class Event(
     var start_time: String? ="",
     var validatedTickets: Int? = null,
     var notValidatedTickets: Int? = null,
+    var image: String?="",
 )

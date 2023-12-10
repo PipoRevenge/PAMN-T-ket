@@ -6,4 +6,6 @@ interface TicketRemote {
     suspend fun updateStatusTicket(id_ticket: String, status: Boolean)
     suspend fun getValidatedTickets(): List<Ticket>
     suspend fun getNotValidatedTickets(): List<Ticket>
+    suspend fun getNumberOfValidatedTickets() : Int
+    suspend fun getNumberOfNotValidatedTickets() : Int
 }

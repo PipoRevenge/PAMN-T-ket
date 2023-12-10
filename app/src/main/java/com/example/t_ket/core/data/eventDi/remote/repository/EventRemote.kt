@@ -4,6 +4,4 @@ import com.example.t_ket.core.domain.model.Event
 
 interface EventRemote {
     suspend fun getEventInfo() : Event
-    suspend fun getNumberOfValidatedTickets() : Int
-    suspend fun getNumberOfNotValidatedTickets() : Int
 }

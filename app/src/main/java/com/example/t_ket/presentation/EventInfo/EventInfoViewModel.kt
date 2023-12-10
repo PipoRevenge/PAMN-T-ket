@@ -39,8 +39,8 @@ class EventInfoViewModel @Inject constructor(
         viewModelScope.launch {
             var info = eventsGet.getEventInfo()
 
-            _entradasNoValidas.value = ticketsGet.getNotValidatedTickets().size
-            _entradasValidadas.value = ticketsGet.getValidatedTickets().size
+            _entradasNoValidas.value = ticketsGet.getNumberOfNotValidatedTicket()
+            _entradasValidadas.value = ticketsGet.getNumberOfValidatedTicket()
             _eventInfo.value = info
             Log.d("TAG" ,"Result: $info")
             Log.d("TAG" ,"Comms")

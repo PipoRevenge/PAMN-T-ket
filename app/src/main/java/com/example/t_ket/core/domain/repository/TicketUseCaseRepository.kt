@@ -14,7 +14,8 @@ interface TicketUseCaseRepository {
 
     //Validar ticket
     suspend fun checkTicket(ticketInfo: String):Boolean?
-
+    suspend fun getNumberOfValidatedTicket():Int
+    suspend fun getNumberOfNotValidatedTicket():Int
 
     fun getTicketById(): Ticket
 

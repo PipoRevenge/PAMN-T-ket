@@ -43,6 +43,15 @@ public class TicketInteractorImpl @Inject constructor() : TicketUseCaseRepositor
             return false
         }
     }
+
+    override suspend fun getNumberOfValidatedTicket(): Int {
+        return ticketRepository.getNumberOfValidatedTickets()
+    }
+
+    override suspend fun getNumberOfNotValidatedTicket(): Int {
+        return ticketRepository.getNumberOfNotValidatedTickets()
+    }
+
     override suspend fun getNotValidatedTickets(): List<Ticket> {
         return ticketRepository.getNotValidatedTickets()
     }

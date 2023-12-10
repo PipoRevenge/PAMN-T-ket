@@ -63,6 +63,11 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
+
+    //Card_view requirements
+    implementation ("androidx.cardview:cardview:1.0.0")
+
+
     //firebase dependencies
     implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
 
@@ -82,6 +87,8 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.1.0") { isTransitive  = false }
     implementation ("com.google.zxing:core:3.3.0")
 
+    //recycler_view requierements
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     //Particles login
     implementation ("com.github.ibrahimsn98:android-particles:2.0")

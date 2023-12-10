@@ -44,6 +44,7 @@ class TicketFirebaseImpl() : TicketRemote {
                         val fullName = userFields["fullName"] as? String
                         val dni = userFields["dni"] as? String
                         val gid = userFields["gid"] as? String
+                        val id = userFields["id"] as? String
 
                         if (event == AppData.event && status == true) {
                             // Crear un objeto Ticket y agregarlo a la lista
@@ -51,7 +52,8 @@ class TicketFirebaseImpl() : TicketRemote {
                                 status = status,
                                 fullName = fullName,
                                 dni = dni,
-                                idGroup = gid
+                                idGroup = gid,
+                                id = id
                             )
                             validatedTicketsList.add(ticket)
                         }
@@ -68,9 +70,48 @@ class TicketFirebaseImpl() : TicketRemote {
 
 
     override suspend fun getNotValidatedTickets(): List<Ticket> {
-        val ticketsList = mutableListOf<Ticket>()
+        val validatedTicketsList = mutableListOf<Ticket>()
 
-        return ticketsList
+        try {
+            val documentSnapshot = firestore.collection("Tickets").document("Tickets").get().await()
+
+            if (documentSnapshot.exists()) {
+                val ticketsData = documentSnapshot.data
+
+                if (ticketsData != null) {
+                    val usersMap = ticketsData["Tickets"] as? Map<String, Any> ?: emptyMap()
+
+                    for ((key, userMap) in usersMap) {
+                        val userFields = userMap as? Map<String, Any> ?: emptyMap()
+
+                        // Verificar si los campos "Event" y "status" coinciden
+                        val event = userFields["Event"] as? String
+                        val status = userFields["status"] as? Boolean
+                        val fullName = userFields["fullName"] as? String
+                        val dni = userFields["dni"] as? String
+                        val gid = userFields["gid"] as? String
+                        val id = userFields["id"] as? String
+                        if (event == AppData.event && status == false) {
+                            // Crear un objeto Ticket y agregarlo a la lista
+                            val ticket = Ticket(
+                                status = status,
+                                fullName = fullName,
+                                dni = dni,
+                                idGroup = gid,
+                                id = id
+                            )
+                            validatedTicketsList.add(ticket)
+                        }
+                    }
+                }
+            } else {
+                Log.d("KKKKKKKKKK", "El documento 'Tickets' no existe")
+            }
+        } catch (e: Exception) {
+            Log.e("KKKKKKKKKK", "Error al obtener el documento 'Tickets': $e")
+        }
+        Log.d("Lista1111", validatedTicketsList.toString())
+        return validatedTicketsList
     }
 
     override suspend fun getNumberOfValidatedTickets(): Int {

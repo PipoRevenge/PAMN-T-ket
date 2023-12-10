@@ -1,17 +1,27 @@
 package com.example.t_ket.presentation.TicketList.adapter
 
-import android.view.View
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.t_ket.R
-import com.example.t_ket.core.domain.model.Ticket
 
-class TicketListViewHolder(view:View) : RecyclerView.ViewHolder(view) {
-    val tName = view.findViewById<TextView>(R.id.name)
-    val tDni = view.findViewById<TextView>(R.id.dni)
-    fun render(ticket: Ticket){
-        tName.text = ticket.fullName
-        tDni.text = ticket.dni
-    }
+import android.view.View
+import android.view.animation.LinearInterpolator
+import androidx.recyclerview.widget.RecyclerView
+import com.example.t_ket.core.domain.model.Ticket
+import com.example.t_ket.databinding.ItemTicketBinding
+
+class TicketListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+    private val binding = ItemTicketBinding.bind(view)
+
+    fun render(ticket: Ticket) {
+
+        binding.itemTitle.text = "Nombre: ${ticket.fullName}"
+
+        binding.itemDni.text = "DNI: ${ticket.dni}"
+
+        binding.itemGid.text = "Id de Grupo: ${ticket.idGroup}"
+
+
+        //      binding.parent.setOnClickListener {
+//              startRotationAnimation(binding.ivHoroscope, newLambda = {onItemSelected(horoscopeInfo)} )
+//            onItemSelected(horoscopeInfo)
+        }
 }

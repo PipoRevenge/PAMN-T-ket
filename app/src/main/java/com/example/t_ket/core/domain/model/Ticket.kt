@@ -7,5 +7,6 @@ data class Ticket(
     var fullName: String? = "", // Propietario del ticket nombre completo
     var dni: String? = "", // Identificador del propietario
     //var checkIn: Date?, // Hora de acceso al evento
+    var id: String? = "",
     var idGroup: String? = "", // Identificador del grupo (si existe)
 )

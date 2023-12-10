@@ -8,20 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.t_ket.R
+import com.example.t_ket.core.domain.model.Event
+import com.example.t_ket.core.domain.model.Ticket
 import com.example.t_ket.databinding.FragmentEventInfoBinding
 import com.example.t_ket.databinding.FragmentTicketListBinding
 import com.example.t_ket.presentation.TicketList.adapter.TicketListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TicketListFragment : Fragment() {
     private var _binding: FragmentTicketListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var ticketListAdapter: TicketListAdapter
+    private lateinit var adapter: TicketListAdapter
     private val TicketListViewModel by viewModels<TicketListViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,30 +40,32 @@ class TicketListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initObservers()
-        initListeners()
+        initList()
+    }
+
+    private fun initList() {
+        adapter = TicketListAdapter()
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.adapter = adapter
     }
 
     private fun initObservers() {
-        TicketListViewModel.ticketState.observe(viewLifecycleOwner) { state ->
+        TicketListViewModel.getList().observe(viewLifecycleOwner) { state ->
             when(state) {
-                true -> {
+                is List<Ticket> -> {
                     with(binding){
-
+                        adapter.updateList(state)
                     }
                 }
-                false -> {
+                null -> {
                     with(binding){
-
+                        Log.d("TAG", "Error Info")
                     }
                 }
             }
         }
     }
 
-    private fun initListeners() {
-        with(binding) {
-        }
-    }
 
 
 }
